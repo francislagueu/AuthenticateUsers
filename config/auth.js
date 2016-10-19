@@ -11,8 +11,8 @@ module.exports = {
     },
     'twitterAuth':{
         'consumerKey': 'WLWGVl3MDRBW9g1Uc9fug8Hnc',
-        'consumerSecret': ' 5QkATkpeuMds4jYBXX7iA3ZyFC6HtUl4xJlger0heimHNKpJC0',
-        'callbackURL': 'http://l27.0.0.1:3000/auth/twitter/callback'
+        'consumerSecret': '5QkATkpeuMds4jYBXX7iA3ZyFC6HtUl4xJlger0heimHNKpJC0',
+        'callbackURL': 'http://127.0.0.1:3000/auth/twitter/callback'
     },
     'spotifyAuth':{
         'clientID': '562bda68b1f04674904f53614456a49b',

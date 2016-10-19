@@ -30,6 +30,19 @@ module.exports = function (app, passport) {
         successRedirect:'/profile',
         failureRedirect:'/'
     }));
+    //TWITTER
+    app.get('/auth/twitter', passport.authenticate('twitter'));
+    app.get('/auth/twitter/callback', passport.authenticate('twitter',{
+        successRedirect:'/profile',
+        failureRedirect:'/'
+    }));
+    //SPOTIFY
+    app.get('/auth/spotify', passport.authenticate('spotify', {scope:['user-read-email', 'user-read-private'], show_dialog:true}));
+    app.get('/auth/spotify/callback', passport.authenticate('spotify',{
+        successRedirect:'/profile',
+        failureRedirect:'/'
+    }));
+
 
     app.get('/logout', function(req, res){
         req.logout();

@@ -131,5 +131,71 @@ module.exports = function(passport){
                 }
             });
         });
-    }))
+    }));
+    
+    ///TWITTER
+    
+    passport.use(new TwitterStrategy({
+        consumerKey:configAuth.twitterAuth.consumerKey,
+        consumerSecret:configAuth.twitterAuth.consumerSecret,
+        callbackURL:configAuth.twitterAuth.callbackURL
+    }, function (token, tokenSecret, profile, done ) {
+        process.nextTick(function () {
+            User.findOne({'twitter.id': profile.id}, function (err, user) {
+                if(err){
+                    return done(err);
+                }
+                if(user){
+                    return done(null, user);
+                }else{
+                    var newUser = new User();
+
+                    newUser.twitter.id = profile.id;
+                    newUser.twitter.token = token;
+                    newUser.twitter.username = profile.username;
+                    newUser.twitter.displayName = profile.displayName;
+
+                    newUser.save(function (err) {
+                        if(err){
+                            throw err;
+                        }
+                        return done(null, newUser);
+                    });
+                }
+            });
+        });
+    }));
+
+    //SPOTIFY
+    passport.use(new SpotifyStrategy({
+        clientID: configAuth.spotifyAuth.clientID,
+        clientSecret:configAuth.spotifyAuth.clientSecret,
+        callbackURL:configAuth.spotifyAuth.callbackURL
+    }, function (accessToken, refreshToken, profile, done ) {
+        process.nextTick(function () {
+            User.findOne({'spotify.id': profile.id}, function (err, user) {
+                if(err){
+                    return done(err);
+                }
+                if(user){
+                    return done(null, user);
+                }else{
+                    var newUser = new User();
+
+                    newUser.spotify.id = profile.id;
+                    newUser.spotify.token = accessToken;
+                    newUser.spotify.email = profile.emails[0].value;
+                    newUser.spotify.display_name = profile.display_name;
+
+                    newUser.save(function (err) {
+                        if(err){
+                            throw err;
+                        }
+                        return done(null, newUser);
+                    });
+                }
+            });
+        });
+    }));
+
 };

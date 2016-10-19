@@ -3,7 +3,8 @@
 <head>
     <title>Node Authentication</title>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+    <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cyborg/bootstrap.min.css" rel="stylesheet" integrity="sha384-D9XILkoivXN+bcvB2kSOowkIvIcBbNdoDQvfBNsxYAIieZbx8/SI4NeUvrRGCpDi" crossorigin="anonymous">
     <style>
         body        { padding-top:80px; word-wrap:break-word; }
     </style>
@@ -58,6 +59,36 @@
                     <strong>token</strong>: <%= user.google.token %><br>
                     <strong>email</strong>: <%= user.google.email %><br>
                     <strong>name</strong>: <%= user.google.name %>
+                </p>
+
+            </div>
+        </div>
+        <!-- TWITTER INFORMATION -->
+        <div class="col-sm-6">
+            <div class="well">
+                <h3 class="text-info"><span class="fa fa-twitter"></span> Twitter</h3>
+
+                <p>
+                    <strong>id</strong>: <%= user.twitter.id %><br>
+                    <strong>token</strong>: <%= user.twitter.token %><br>
+                    <strong>username</strong>: <%= user.twitter.username %><br>
+                    <strong>displayName</strong>: <%= user.twitter.displayName %>
+                </p>
+
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="well">
+                <h3 class="text-info"><span class="fa fa-spotify"></span> Spotify</h3>
+
+                <p>
+                    <strong>id</strong>: <%= user.spotify.id %><br>
+                    <strong>token</strong>: <%= user.spotify.token %><br>
+                    <strong>email</strong>: <%= user.spotify.email %><br>
+                    <strong>displayName</strong>: <%= user.spotify.display_name %>
                 </p>
 
             </div>
