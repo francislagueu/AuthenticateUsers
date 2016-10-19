@@ -3,6 +3,7 @@ var FacebookStrategy = require('passport-facebook').Strategy;
 var TwitterStrategy = require('passport-twitter').Strategy;
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var SpotifyStrategy = require('passport-spotify').Strategy;
+var YoutubeV3Strategy = require('passport-youtube-v3').Strategy;
 
 var User = require('../app/models/user');
 var configAuth = require('./auth');
@@ -197,5 +198,39 @@ module.exports = function(passport){
             });
         });
     }));
+
+    passport.use(new YoutubeV3Strategy({
+        clientID: configAuth.youtubeAuth.clientID,
+        clientSecret: configAuth.youtubeAuth.clientSecret,
+        callbackURL: "http://localhost:3000/auth/youtube/callback",
+        scope: ['https://www.googleapis.com/auth/youtube']
+    },
+      function(accessToken, refreshToken, profile, done) {
+        process.nextTick(function(){
+        User.findOne({ 'youtube.id': profile.id }, function (err, user) {
+          // return done(err, user);
+           if(err){
+                    return done(err);
+                }
+                if(user){
+                    return done(null, user);
+                }else{
+                    var newUser = new User();
+
+                    newUser.youtube.id = profile.id;
+                    newUser.youtube.token = accessToken;
+                    newUser.youtube.name = profile.displayName;
+
+                    newUser.save(function (err) {
+                        if(err){
+                            throw err;
+                        }
+                        return done(null, newUser);
+                    });
+                }
+        });
+        });
+      }
+    ));
 
 };

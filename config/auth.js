@@ -18,5 +18,11 @@ module.exports = {
         'clientID': '562bda68b1f04674904f53614456a49b',
         'clientSecret': '21e398a783a64d1da033b66bb5c2a817',
         'callbackURL': 'http://localhost:3000/auth/spotify/callback'
+    },
+    'youtubeAuth': {
+        'clientID':'249154147070-8giv92se5vejk803lokt05lusoef5ir5.apps.googleusercontent.com',
+        'clientSecret':'ZRsxEiA6eO-mM6mtb9F0aGRf',
+        'scope':'https://www.googleapis.com/auth/youtube&response_type=code&access_type=offline',
+        'callbackURL': 'http://localhost:3000/auth/youtube/callback'
     }
 }

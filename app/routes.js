@@ -1,3 +1,4 @@
+var http = require('http');
 /**
  * Created by Francis on 10/17/2016.
  */
@@ -14,7 +15,13 @@ module.exports = function (app, passport) {
     app.get('/signup', function(req, res){
         res.render('signup.ejs', {message: req.flash('signupMessage')});
     });
-
+    app.get('/playlists',isLoggedIn,function(req, res){
+        if(req.user){
+            http
+            res.render('playlists.ejs', {user:req.user});
+        }
+        else{res.status(500).end();}
+    });
     app.get('/profile',isLoggedIn, function(req,res){
         res.render('profile.ejs',{ user: req.user });
     });
@@ -42,7 +49,11 @@ module.exports = function (app, passport) {
         successRedirect:'/profile',
         failureRedirect:'/'
     }));
-
+    app.get('/auth/youtube', passport.authenticate('youtube', {}));
+    app.get('/auth/youtube/callback', passport.authenticate('youtube', {
+        successRedirect:'/profile',
+        failureRedirect:'/'
+    }));
 
     app.get('/logout', function(req, res){
         req.logout();
