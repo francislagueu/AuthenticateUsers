@@ -32,6 +32,11 @@ var userSchema = mongoose.Schema({
         token:String,
         email:String,
         display_name:String,
+    },
+    youtube:{
+        id: String,
+        token: String, 
+        name: String
     }
 
 });
