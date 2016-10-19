@@ -5,14 +5,14 @@ module.exports = {
         'callbackURL': 'http://localhost:3000/auth/facebook/callback'
     },
     'googleAuth':{
-        'clientID': ' 15027467851-6f9637iann3pstdstg78gi87gut5gdkc.apps.googleusercontent.com',
-        'clientSecret': ' vF-nIkgRYGDebKXguWaFMOqT',
-        'callbackURL': 'http://localhost:3000/auth/google/callback'
+        'clientID': '15027467851-6f9637iann3pstdstg78gi87gut5gdkc.apps.googleusercontent.com',
+        'clientSecret': 'vF-nIkgRYGDebKXguWaFMOqT',
+        'callbackURL': 'http://127.0.0.1:3000/auth/google/callback'
     },
     'twitterAuth':{
         'consumerKey': 'WLWGVl3MDRBW9g1Uc9fug8Hnc',
         'consumerSecret': ' 5QkATkpeuMds4jYBXX7iA3ZyFC6HtUl4xJlger0heimHNKpJC0',
-        'callbackURL': 'http://localhost:3000/auth/twitter/callback'
+        'callbackURL': 'http://l27.0.0.1:3000/auth/twitter/callback'
     },
     'spotifyAuth':{
         'clientID': '562bda68b1f04674904f53614456a49b',
