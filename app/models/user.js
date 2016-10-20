@@ -29,9 +29,18 @@ var userSchema = mongoose.Schema({
     },
     spotify:{
         id:String,
+        country:String,
+        urls:Object,
+        href:String,
         token:String,
         email:String,
+        photo:String,
         display_name:String,
+    },
+    youtube:{
+        id: String,
+        token: String, 
+        name: String
     }
 
 });

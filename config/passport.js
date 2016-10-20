@@ -3,6 +3,7 @@ var FacebookStrategy = require('passport-facebook').Strategy;
 var TwitterStrategy = require('passport-twitter').Strategy;
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var SpotifyStrategy = require('passport-spotify').Strategy;
+var YoutubeV3Strategy = require('passport-youtube-v3').Strategy;
 
 var User = require('../app/models/user');
 var configAuth = require('./auth');
@@ -173,6 +174,7 @@ module.exports = function(passport){
         callbackURL:configAuth.spotifyAuth.callbackURL
     }, function (accessToken, refreshToken, profile, done ) {
         process.nextTick(function () {
+            console.log(profile);
             User.findOne({'spotify.id': profile.id}, function (err, user) {
                 if(err){
                     return done(err);
@@ -184,8 +186,12 @@ module.exports = function(passport){
 
                     newUser.spotify.id = profile.id;
                     newUser.spotify.token = accessToken;
+                    newUser.spotify.country = profile.country;
+                    newUser.spotify.urls = profile.external_urls;
+                    newUser.spotify.href = profile.href;
+                    newUser.spotify.photo = profile.photos;
                     newUser.spotify.email = profile.emails[0].value;
-                    newUser.spotify.display_name = profile.display_name;
+                    newUser.spotify.display_name = profile.displayName;
 
                     newUser.save(function (err) {
                         if(err){
@@ -197,5 +203,45 @@ module.exports = function(passport){
             });
         });
     }));
+
+    passport.use(new YoutubeV3Strategy({
+        clientID: configAuth.youtubeAuth.clientID,
+        clientSecret: configAuth.youtubeAuth.clientSecret,
+        callbackURL: "http://127.0.0.1:3000/auth/youtube/callback",
+        scope: [
+            'https://www.googleapis.com/auth/youtube',
+            'https://www.googleapis.com/auth/youtube.readonly',
+            'https://www.googleapis.com/auth/plus.login',
+            'https://www.googleapis.com/auth/youtube.force-ssl'
+        ]
+    },
+      function(accessToken, refreshToken, profile, done) {
+        console.log(profile);
+        process.nextTick(function(){
+        User.findOne({ 'youtube.id': profile.id }, function (err, user) {
+          // return done(err, user);
+           if(err){
+                    return done(err);
+                }
+                if(user){
+                    return done(null, user);
+                }else{
+                    var newUser = new User();
+
+                    newUser.youtube.id = profile.id;
+                    newUser.youtube.token = accessToken;
+                    newUser.youtube.name = profile.displayName;
+
+                    newUser.save(function (err) {
+                        if(err){
+                            throw err;
+                        }
+                        return done(null, newUser);
+                    });
+                }
+        });
+        });
+      }
+    ));
 
 };

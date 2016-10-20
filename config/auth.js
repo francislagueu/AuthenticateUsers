@@ -19,5 +19,10 @@ module.exports = {
         'clientSecret': '21e398a783a64d1da033b66bb5c2a817',
         'callbackURL': 'http://localhost:3000/auth/spotify/callback'
     },
-
+    'youtubeAuth': {
+        'clientID':'15027467851-6f9637iann3pstdstg78gi87gut5gdkc.apps.googleusercontent.com',
+        'clientSecret':'vF-nIkgRYGDebKXguWaFMOqT',
+        'scope':'https://www.googleapis.com/auth/youtube&response_type=code&access_type=offline',
+        'callbackURL': 'http://127.0.0.1:3000/auth/google/callback'
+    }
 }

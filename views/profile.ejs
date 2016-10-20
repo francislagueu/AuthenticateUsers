@@ -87,13 +87,31 @@
                 <p>
                     <strong>id</strong>: <%= user.spotify.id %><br>
                     <strong>token</strong>: <%= user.spotify.token %><br>
+                    <strong>url</strong>: <%= user.spotify.urls %><br>
+                    <strong>href</strong>: <%= user.spotify.href %><br>
+                    <strong>country</strong>: <%= user.spotify.country %><br>
+                    <strong>photo</strong>: <img src="<%= user.spotify.country %>"/><br>
                     <strong>email</strong>: <%= user.spotify.email %><br>
                     <strong>displayName</strong>: <%= user.spotify.display_name %>
                 </p>
 
             </div>
         </div>
+        <div class="col-sm-6">
+            <div class="well">
+                <h3 class="text-info"><span class="fa fa-youtube"></span> YouTube</h3>
+
+                <p>
+                    <strong>id</strong>: <%= user.youtube.id %><br>
+                    <strong>token</strong>: <%= user.youtube.token %><br>
+                    <strong>displayName</strong>: <%= user.youtube.name %>
+                </p>
+                <a href = '/playlists'>See your Playlists!</a>
+            </div>
+        </div>
     </div>
+
+
 
 </div>
 </body>
