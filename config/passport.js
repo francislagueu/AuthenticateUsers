@@ -78,6 +78,7 @@ module.exports = function(passport){
         passReqToCallback: true
     }, function (req, token, refreshToken, profile, done) {
         process.nextTick(function () {
+            console.log(profile);
             if(!req.user) {
                 User.findOne({'facebook.id': profile.id}, function (err, user) {
                     if (err) {
@@ -136,6 +137,7 @@ module.exports = function(passport){
         passReqToCallback:true
     }, function (req, token, refreshToken, profile, done ) {
         process.nextTick(function () {
+            console.log(profile);
             if(!req.user) {
                 User.findOne({'google.id': profile.id}, function (err, user) {
                     if (err) {
@@ -146,7 +148,8 @@ module.exports = function(passport){
 
                             user.google.id = profile.id;
                             user.google.token = token;
-                            user.google.name = profile.displayName
+                            user.google.name = profile.displayName;
+                            user.google.image = profile.image;
                             user.google.email = profile.emails[0].value;
 
                             user.save(function (err) {
@@ -162,7 +165,8 @@ module.exports = function(passport){
 
                         newUser.google.id = profile.id;
                         newUser.google.token = token;
-                        newUser.google.name = profile.displayName
+                        newUser.google.name = profile.displayName;
+                        newUser.google.image = profile.image;
                         newUser.google.email = profile.emails[0].value;
 
                         newUser.save(function (err) {
@@ -178,7 +182,8 @@ module.exports = function(passport){
 
                 user.google.id = profile.id;
                 user.google.token = token;
-                user.google.name = profile.displayName
+                user.google.name = profile.displayName;
+                user.google.image = profile.image;
                 user.google.email = profile.emails[0].value;
 
                 user.save(function (err) {
@@ -199,6 +204,7 @@ module.exports = function(passport){
         callbackURL:configAuth.twitterAuth.callbackURL,
         passReqToCallback:true
     }, function (req, token, tokenSecret, profile, done ) {
+        console.log(profile);
         process.nextTick(function () {
             if(!req.user) {
                 User.findOne({'twitter.id': profile.id}, function (err, user) {

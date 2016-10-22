@@ -133,7 +133,7 @@ module.exports = function (app, passport) {
         });
     });
 
-    app.get('/connect/spotify', passport.authorize('spotify', {scope:'email'}));
+    app.get('/connect/spotify', passport.authorize('spotify', {scope:['user-read-email', 'user-read-private']}));
     app.get('connect/spotify/callback', passport.authorize('spotify',{
         successRedirect:'/profile',
         failureRedirect:'/'
@@ -147,7 +147,7 @@ module.exports = function (app, passport) {
         });
     });
 
-    app.get('/connect/youtube', passport.authorize('youtube', {scope:['profile','email']}));
+    app.get('/connect/youtube', passport.authorize('youtube', {}));
     app.get('connect/youtube/callback', passport.authorize('youtube',{
         successRedirect:'/profile',
         failureRedirect:'/'

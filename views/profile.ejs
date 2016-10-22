@@ -64,7 +64,8 @@
                     <strong>id</strong>: <%= user.google.id %><br>
                     <strong>token</strong>: <%= user.google.token %><br>
                     <strong>email</strong>: <%= user.google.email %><br>
-                    <strong>name</strong>: <%= user.google.name %>
+                    <strong>name</strong>: <%= user.google.name %><br>
+                    <strong>photo</strong>: <img src="<%= user.google.image %>"/>
                 </p>
                 <a href="/unlink/google" class="btn btn-danger">Unlink</a>
                 <% } else { %>
@@ -102,7 +103,7 @@
                     <strong>url</strong>: <%= user.spotify.urls %><br>
                     <strong>href</strong>: <%= user.spotify.href %><br>
                     <strong>country</strong>: <%= user.spotify.country %><br>
-                    <strong>photo</strong>: <img src="<%= user.spotify.country %>"/><br>
+                    <strong>photo</strong>: <img src="<%= user.spotify.photo %>"/><br>
                     <strong>email</strong>: <%= user.spotify.email %><br>
                     <strong>displayName</strong>: <%= user.spotify.display_name %>
                 </p>
